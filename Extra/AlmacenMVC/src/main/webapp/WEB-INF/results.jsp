@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Warehouse Data</title>
+    <title>Datos del Almacén</title>
     <style>
         :root {
             --primary: #4F46E5;
@@ -115,19 +115,19 @@
 </head>
 <body>
     <div class="container">
-        <h1>Warehouse Data</h1>
+        <h1>Datos del Almacén</h1>
         
         <div class="stats-grid">
             <div class="stat-card">
-                <h3>Total Products (Units)</h3>
+                <h3>Total de Productos (Unidades)</h3>
                 <p class="value"><fmt:formatNumber value="${totalQuantity}" pattern="#,##0"/></p>
             </div>
             <div class="stat-card" style="background: linear-gradient(135deg, #10B981, #059669);">
-                <h3>Total Warehouse Value</h3>
+                <h3>Valor Total del Almacén</h3>
                 <p class="value"><fmt:formatNumber value="${totalWarehouseValue}" type="currency" currencySymbol="$"/></p>
             </div>
             <div class="stat-card" style="background: linear-gradient(135deg, #8B5CF6, #7C3AED);">
-                <h3>Weighted Average Price</h3>
+                <h3>Precio Promedio Ponderado</h3>
                 <p class="value"><fmt:formatNumber value="${weightedAveragePrice}" type="currency" currencySymbol="$"/></p>
             </div>
         </div>
@@ -135,8 +135,8 @@
         <c:choose>
             <c:when test="${empty products}">
                 <div class="empty-state">
-                    <h3>No products registered</h3>
-                    <p>Start by adding products to your warehouse to see them here.</p>
+                    <h3>No hay productos registrados</h3>
+                    <p>Empieza agregando productos a tu almacén para verlos aquí.</p>
                 </div>
             </c:when>
             <c:otherwise>
@@ -144,10 +144,10 @@
                     <thead>
                         <tr>
                             <th>ID (MongoDB)</th>
-                            <th>Name</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Total Value</th>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Valor Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -166,7 +166,7 @@
         </c:choose>
 
         <div style="text-align: center; margin-top: 2rem;">
-            <a href="index.jsp" class="back-link">&larr; Back to Registration</a>
+            <a href="index.jsp" class="back-link">&larr; Volver al Registro</a>
         </div>
     </div>
 </body>

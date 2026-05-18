@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Registration - Warehouse</title>
+    <title>Registro de Productos - Almacén</title>
     <style>
         :root {
             --primary: #4F46E5;
@@ -99,30 +99,30 @@
 </head>
 <body>
     <div class="container">
-        <h1>Register Product</h1>
+        <h1>Registrar Producto</h1>
         <form action="products" method="post">
             <input type="hidden" name="action" value="save">
             
             <div class="form-group">
-                <label for="name">Product Name</label>
-                <input type="text" id="name" name="name" required placeholder="E.g. Laptops">
+                <label for="name">Nombre del Producto</label>
+                <input type="text" id="name" name="name" required placeholder="Ej. Laptops">
             </div>
             
             <div class="form-group">
-                <label for="quantity">Quantity</label>
-                <input type="number" id="quantity" name="quantity" required min="1" placeholder="E.g. 10">
+                <label for="quantity">Cantidad</label>
+                <input type="number" id="quantity" name="quantity" required min="1" placeholder="Ej. 10">
             </div>
             
             <div class="form-group">
-                <label for="price">Unit Price ($)</label>
-                <input type="number" id="price" name="price" required min="0.01" step="0.01" placeholder="E.g. 999.99">
+                <label for="price">Precio Unitario ($)</label>
+                <input type="number" id="price" name="price" required min="0.01" step="0.01" placeholder="Ej. 999.99">
             </div>
             
-            <button type="submit">Save Product</button>
+            <button type="submit">Guardar Producto</button>
         </form>
         
         <div class="links">
-            <a href="products?action=list">View Warehouse Data &rarr;</a>
+            <a href="products?action=list">Ver Datos del Almacén &rarr;</a>
         </div>
     </div>
 </body>
