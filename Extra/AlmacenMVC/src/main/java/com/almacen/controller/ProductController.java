@@ -29,8 +29,11 @@ public class ProductController extends HttpServlet {
             String name = request.getParameter("name");
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             double price = Double.parseDouble(request.getParameter("price"));
+            String category = request.getParameter("category");
+            String description = request.getParameter("description");
+            String supplier = request.getParameter("supplier");
             
-            Product p = new Product(name, quantity, price);
+            Product p = new Product(name, quantity, price, category, description, supplier);
             productDAO.insertProduct(p);
             
             response.sendRedirect("products?action=list");

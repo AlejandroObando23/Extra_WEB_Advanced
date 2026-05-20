@@ -17,12 +17,24 @@ public class Product {
     @BsonProperty("price")
     private double price;
 
+    @BsonProperty("category")
+    private String category;
+    
+    @BsonProperty("description")
+    private String description;
+    
+    @BsonProperty("supplier")
+    private String supplier;
+
     public Product() {}
 
-    public Product(String name, int quantity, double price) {
+    public Product(String name, int quantity, double price, String category, String description, String supplier) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
+        this.category = category;
+        this.description = description;
+        this.supplier = supplier;
     }
 
     public ObjectId getId() { return id; }
@@ -36,6 +48,15 @@ public class Product {
     
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
+    
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+    
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    
+    public String getSupplier() { return supplier; }
+    public void setSupplier(String supplier) { this.supplier = supplier; }
     
     public double getTotal() {
         return this.quantity * this.price;

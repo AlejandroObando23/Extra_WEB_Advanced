@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Productos - Almacén</title>
+    <title>Product Registration - Warehouse</title>
     <style>
         :root {
             --primary: #4F46E5;
@@ -99,30 +99,45 @@
 </head>
 <body>
     <div class="container">
-        <h1>Registrar Producto</h1>
+        <h1>Register Product</h1>
         <form action="products" method="post">
             <input type="hidden" name="action" value="save">
             
             <div class="form-group">
-                <label for="name">Nombre del Producto</label>
-                <input type="text" id="name" name="name" required placeholder="Ej. Laptops">
+                <label for="name">Product Name</label>
+                <input type="text" id="name" name="name" required placeholder="e.g. Laptops">
             </div>
             
             <div class="form-group">
-                <label for="quantity">Cantidad</label>
-                <input type="number" id="quantity" name="quantity" required min="1" placeholder="Ej. 10">
+                <label for="category">Category</label>
+                <input type="text" id="category" name="category" required placeholder="e.g. Electronics">
             </div>
             
             <div class="form-group">
-                <label for="price">Precio Unitario ($)</label>
-                <input type="number" id="price" name="price" required min="0.01" step="0.01" placeholder="Ej. 999.99">
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" required placeholder="e.g. High performance laptop">
             </div>
             
-            <button type="submit">Guardar Producto</button>
+            <div class="form-group">
+                <label for="supplier">Supplier</label>
+                <input type="text" id="supplier" name="supplier" required placeholder="e.g. TechCorp">
+            </div>
+            
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" required min="1" placeholder="e.g. 10">
+            </div>
+            
+            <div class="form-group">
+                <label for="price">Unit Price ($)</label>
+                <input type="number" id="price" name="price" required min="0.01" step="0.01" placeholder="e.g. 999.99">
+            </div>
+            
+            <button type="submit">Save Product</button>
         </form>
         
         <div class="links">
-            <a href="products?action=list">Ver Datos del Almacén &rarr;</a>
+            <a href="products?action=list">View Warehouse Data &rarr;</a>
         </div>
     </div>
 </body>
