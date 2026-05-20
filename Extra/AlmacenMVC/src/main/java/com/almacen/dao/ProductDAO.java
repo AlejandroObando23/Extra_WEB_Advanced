@@ -49,7 +49,7 @@ public class ProductDAO {
     public boolean deleteProduct(String id) {
         try {
             ObjectId objectId = new ObjectId(id);
-            var result = collection.deleteOne(Filters.eq("_id", objectId));
+            com.mongodb.client.result.DeleteResult result = collection.deleteOne(Filters.eq("_id", objectId));
             return result.getDeletedCount() > 0;
         } catch (IllegalArgumentException e) {
             // Invalid ObjectId format
