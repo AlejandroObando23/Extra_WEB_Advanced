@@ -23,6 +23,7 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 2rem 0;
         }
         .container {
             background-color: var(--card-bg);
@@ -30,7 +31,7 @@
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             width: 100%;
-            max-width: 450px;
+            max-width: 550px;
         }
         h1 {
             margin-top: 0;
@@ -48,7 +49,7 @@
             font-weight: 500;
             color: var(--text-muted);
         }
-        input[type="text"], input[type="number"] {
+        input[type="text"], input[type="number"], select, textarea {
             width: 100%;
             padding: 0.75rem;
             border: 1px solid #D1D5DB;
@@ -56,11 +57,16 @@
             box-sizing: border-box;
             font-size: 1rem;
             transition: border-color 0.2s;
+            font-family: inherit;
         }
-        input:focus {
+        input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
         }
         button {
             width: 100%;
@@ -95,6 +101,11 @@
             color: var(--primary-hover);
             text-decoration: underline;
         }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -105,32 +116,43 @@
             
             <div class="form-group">
                 <label for="name">Product Name</label>
-                <input type="text" id="name" name="name" required placeholder="e.g. Laptops">
+                <input type="text" id="name" name="name" required placeholder="e.g. Wireless Mouse">
             </div>
             
-            <div class="form-group">
-                <label for="category">Category</label>
-                <input type="text" id="category" name="category" required placeholder="e.g. Electronics">
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>Select category...</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Office Supplies">Office Supplies</option>
+                        <option value="Peripherals">Peripherals</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="supplier">Supplier</label>
+                    <input type="text" id="supplier" name="supplier" required placeholder="e.g. TechCorp">
+                </div>
             </div>
-            
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" required min="1" placeholder="e.g. 10">
+                </div>
+                
+                <div class="form-group">
+                    <label for="price">Unit Price ($)</label>
+                    <input type="number" id="price" name="price" required min="0.01" step="0.01" placeholder="e.g. 29.99">
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="description">Description</label>
-                <input type="text" id="description" name="description" required placeholder="e.g. High performance laptop">
-            </div>
-            
-            <div class="form-group">
-                <label for="supplier">Supplier</label>
-                <input type="text" id="supplier" name="supplier" required placeholder="e.g. TechCorp">
-            </div>
-            
-            <div class="form-group">
-                <label for="quantity">Quantity</label>
-                <input type="number" id="quantity" name="quantity" required min="1" placeholder="e.g. 10">
-            </div>
-            
-            <div class="form-group">
-                <label for="price">Unit Price ($)</label>
-                <input type="number" id="price" name="price" required min="0.01" step="0.01" placeholder="e.g. 999.99">
+                <textarea id="description" name="description" placeholder="Short description of the product..."></textarea>
             </div>
             
             <button type="submit">Save Product</button>

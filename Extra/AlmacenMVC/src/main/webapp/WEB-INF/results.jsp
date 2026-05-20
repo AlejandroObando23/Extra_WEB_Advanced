@@ -32,7 +32,7 @@
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             width: 100%;
-            max-width: 900px;
+            max-width: 1100px;
         }
         h1 {
             margin-top: 0;
@@ -111,6 +111,15 @@
             border-radius: 8px;
             border: 2px dashed var(--border-color);
         }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 9999px;
+            background-color: #EEF2FF;
+            color: var(--primary);
+        }
     </style>
 </head>
 <body>
@@ -140,34 +149,35 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID (MongoDB)</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Description</th>
-                            <th>Supplier</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Total Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="p" items="${products}">
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
                             <tr>
-                                <td style="font-family: monospace; color: var(--text-muted); font-size: 0.9em;">${p.id}</td>
-                                <td><strong>${p.name}</strong></td>
-                                <td>${p.category}</td>
-                                <td>${p.description}</td>
-                                <td>${p.supplier}</td>
-                                <td>${p.quantity}</td>
-                                <td><fmt:formatNumber value="${p.price}" type="currency" currencySymbol="$"/></td>
-                                <td><fmt:formatNumber value="${p.total}" type="currency" currencySymbol="$"/></td>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Supplier</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Total Value</th>
                             </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="p" items="${products}">
+                                <tr>
+                                    <td>
+                                        <strong>${p.name}</strong><br>
+                                        <span style="font-size: 0.85rem; color: var(--text-muted);">${p.description}</span>
+                                    </td>
+                                    <td><span class="badge">${p.category}</span></td>
+                                    <td>${p.supplier}</td>
+                                    <td>${p.quantity}</td>
+                                    <td><fmt:formatNumber value="${p.price}" type="currency" currencySymbol="$"/></td>
+                                    <td><strong><fmt:formatNumber value="${p.total}" type="currency" currencySymbol="$"/></strong></td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </c:otherwise>
         </c:choose>
 
