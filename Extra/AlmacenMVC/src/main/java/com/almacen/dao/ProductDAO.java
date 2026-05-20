@@ -56,4 +56,24 @@ public class ProductDAO {
             return false;
         }
     }
+
+    public Product getProductById(String id) {
+        try {
+            ObjectId objectId = new ObjectId(id);
+            return collection.find(Filters.eq("_id", objectId)).first();
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
+
+    public boolean updateProduct(String id, Product updatedProduct) {
+        try {
+            ObjectId objectId = new ObjectId(id);
+            updatedProduct.setId(objectId); // Keep the same ID
+            com.mongodb.client.result.UpdateResult result = collection.replaceOne(Filters.eq("_id", objectId), updatedProduct);
+            return result.getModifiedCount() > 0;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
 }

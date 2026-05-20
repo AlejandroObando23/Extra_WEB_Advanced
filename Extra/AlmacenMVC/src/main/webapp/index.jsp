@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Registration - Warehouse</title>
+    <title>${empty product ? 'Product Registration' : 'Edit Product'} - Warehouse</title>
     <style>
         :root {
             --primary: #4F46E5;
@@ -127,7 +128,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Register Product</h1>
+        <h1>${empty product ? 'Register Product' : 'Edit Product'}</h1>
         
         <% if (request.getAttribute("error") != null) { %>
             <div class="alert alert-error">
@@ -141,50 +142,53 @@
         <% } %>
 
         <form action="products" method="post">
-            <input type="hidden" name="action" value="save">
+            <input type="hidden" name="action" value="${empty product ? 'save' : 'update'}">
+            <c:if test="${not empty product}">
+                <input type="hidden" name="id" value="${product.id}">
+            </c:if>
             
             <div class="form-group">
                 <label for="name">Product Name</label>
-                <input type="text" id="name" name="name" required placeholder="e.g. Wireless Mouse">
+                <input type="text" id="name" name="name" required placeholder="e.g. Wireless Mouse" value="${product.name}">
             </div>
             
             <div class="grid-2">
                 <div class="form-group">
                     <label for="category">Category</label>
                     <select id="category" name="category" required>
-                        <option value="" disabled selected>Select category...</option>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Furniture">Furniture</option>
-                        <option value="Office Supplies">Office Supplies</option>
-                        <option value="Peripherals">Peripherals</option>
-                        <option value="Other">Other</option>
+                        <option value="" ${empty product ? 'selected' : ''} disabled>Select category...</option>
+                        <option value="Electronics" ${product.category == 'Electronics' ? 'selected' : ''}>Electronics</option>
+                        <option value="Furniture" ${product.category == 'Furniture' ? 'selected' : ''}>Furniture</option>
+                        <option value="Office Supplies" ${product.category == 'Office Supplies' ? 'selected' : ''}>Office Supplies</option>
+                        <option value="Peripherals" ${product.category == 'Peripherals' ? 'selected' : ''}>Peripherals</option>
+                        <option value="Other" ${product.category == 'Other' ? 'selected' : ''}>Other</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
                     <label for="supplier">Supplier</label>
-                    <input type="text" id="supplier" name="supplier" required placeholder="e.g. TechCorp">
+                    <input type="text" id="supplier" name="supplier" required placeholder="e.g. TechCorp" value="${product.supplier}">
                 </div>
             </div>
 
             <div class="grid-2">
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
-                    <input type="number" id="quantity" name="quantity" required min="1" placeholder="e.g. 10">
+                    <input type="number" id="quantity" name="quantity" required min="1" placeholder="e.g. 10" value="${product.quantity}">
                 </div>
                 
                 <div class="form-group">
                     <label for="price">Unit Price ($)</label>
-                    <input type="number" id="price" name="price" required min="0.01" step="0.01" placeholder="e.g. 29.99">
+                    <input type="number" id="price" name="price" required min="0.01" step="0.01" placeholder="e.g. 29.99" value="${product.price}">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" placeholder="Short description of the product..."></textarea>
+                <textarea id="description" name="description" placeholder="Short description of the product...">${product.description}</textarea>
             </div>
             
-            <button type="submit">Save Product</button>
+            <button type="submit">${empty product ? 'Save Product' : 'Update Product'}</button>
         </form>
         
         <div class="links">

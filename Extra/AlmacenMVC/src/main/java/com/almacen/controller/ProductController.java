@@ -66,6 +66,41 @@ public class ProductController extends HttpServlet {
             } else {
                 response.sendRedirect("products?action=list&error=invalid_id");
             }
+        } else if ("update".equals(action)) {
+            try {
+                String id = request.getParameter("id");
+                String name = request.getParameter("name");
+                String quantityStr = request.getParameter("quantity");
+                String priceStr = request.getParameter("price");
+                String category = request.getParameter("category");
+                String description = request.getParameter("description");
+                String supplier = request.getParameter("supplier");
+                
+                if (id == null || id.trim().isEmpty() || name == null || name.trim().isEmpty() || quantityStr == null || priceStr == null || category == null) {
+                    throw new IllegalArgumentException("Required fields are missing");
+                }
+                
+                int quantity = Integer.parseInt(quantityStr);
+                double price = Double.parseDouble(priceStr);
+                
+                if (quantity < 1 || price <= 0) {
+                     throw new IllegalArgumentException("Quantity must be >= 1 and price > 0");
+                }
+                
+                Product p = new Product(name.trim(), quantity, price, category, description, supplier);
+                boolean updated = productDAO.updateProduct(id, p);
+                
+                if (updated) {
+                    response.sendRedirect("products?action=list&success=updated");
+                } else {
+                    throw new Exception("Update failed, product not found.");
+                }
+            } catch (Exception e) {
+                request.setAttribute("error", "Error updating product: " + e.getMessage());
+                // We forward back to edit, but we'd need the product data to populate the form again.
+                // For simplicity, redirect to list with error
+                response.sendRedirect("products?action=list&error=update_error");
+            }
         }
     }
 
@@ -95,6 +130,19 @@ public class ProductController extends HttpServlet {
             request.setAttribute("weightedAveragePrice", weightedAveragePrice);
             
             request.getRequestDispatcher("/WEB-INF/results.jsp").forward(request, response);
+        } else if ("edit".equals(action)) {
+            String id = request.getParameter("id");
+            if (id != null && !id.trim().isEmpty()) {
+                Product product = productDAO.getProductById(id);
+                if (product != null) {
+                    request.setAttribute("product", product);
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("products?action=list&error=not_found");
+                }
+            } else {
+                response.sendRedirect("products?action=list&error=invalid_id");
+            }
         } else {
             // Default to insert page
             request.getRequestDispatcher("/index.jsp").forward(request, response);

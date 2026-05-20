@@ -151,6 +151,21 @@
         .btn-delete:hover {
             background-color: #DC2626;
         }
+        .btn-edit {
+            background-color: #3B82F6;
+            color: white;
+            border: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .btn-edit:hover {
+            background-color: #2563EB;
+        }
     </style>
 </head>
 <body>
@@ -216,11 +231,14 @@
                                     <td><fmt:formatNumber value="${p.price}" type="currency" currencySymbol="$"/></td>
                                     <td><strong><fmt:formatNumber value="${p.total}" type="currency" currencySymbol="$"/></strong></td>
                                     <td>
-                                        <form action="products" method="post" style="margin: 0;" onsubmit="return confirm('Are you sure you want to delete this product?');">
-                                            <input type="hidden" name="action" value="delete">
-                                            <input type="hidden" name="id" value="${p.id}">
-                                            <button type="submit" class="btn-delete">Delete</button>
-                                        </form>
+                                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                            <a href="products?action=edit&id=${p.id}" class="btn-edit">Edit</a>
+                                            <form action="products" method="post" style="margin: 0;" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                                <input type="hidden" name="action" value="delete">
+                                                <input type="hidden" name="id" value="${p.id}">
+                                                <button type="submit" class="btn-delete">Delete</button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             </c:forEach>
