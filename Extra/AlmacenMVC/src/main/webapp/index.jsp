@@ -106,11 +106,40 @@
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .alert-error {
+            background-color: #FEF2F2;
+            color: #DC2626;
+            border: 1px solid #F87171;
+        }
+        .alert-success {
+            background-color: #ECFDF5;
+            color: #059669;
+            border: 1px solid #34D399;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Register Product</h1>
+        
+        <% if (request.getAttribute("error") != null) { %>
+            <div class="alert alert-error">
+                <%= request.getAttribute("error") %>
+            </div>
+        <% } %>
+        <% if ("saved".equals(request.getParameter("success"))) { %>
+            <div class="alert alert-success">
+                Product registered successfully!
+            </div>
+        <% } %>
+
         <form action="products" method="post">
             <input type="hidden" name="action" value="save">
             

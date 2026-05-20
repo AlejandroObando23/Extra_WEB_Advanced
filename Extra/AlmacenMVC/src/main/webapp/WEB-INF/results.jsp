@@ -120,12 +120,53 @@
             background-color: #EEF2FF;
             color: var(--primary);
         }
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .alert-error {
+            background-color: #FEF2F2;
+            color: #DC2626;
+            border: 1px solid #F87171;
+        }
+        .alert-success {
+            background-color: #ECFDF5;
+            color: #059669;
+            border: 1px solid #34D399;
+        }
+        .btn-delete {
+            background-color: #EF4444;
+            color: white;
+            border: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .btn-delete:hover {
+            background-color: #DC2626;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Warehouse Data</h1>
         
+        <% if ("deleted".equals(request.getParameter("success"))) { %>
+            <div class="alert alert-success">Product deleted successfully!</div>
+        <% } %>
+        <% if ("delete_failed".equals(request.getParameter("error"))) { %>
+            <div class="alert alert-error">Failed to delete product.</div>
+        <% } %>
+        <% if ("invalid_id".equals(request.getParameter("error"))) { %>
+            <div class="alert alert-error">Invalid product ID for deletion.</div>
+        <% } %>
+
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Total Products (Units)</h3>
@@ -159,6 +200,7 @@
                                 <th>Quantity</th>
                                 <th>Unit Price</th>
                                 <th>Total Value</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -173,6 +215,13 @@
                                     <td>${p.quantity}</td>
                                     <td><fmt:formatNumber value="${p.price}" type="currency" currencySymbol="$"/></td>
                                     <td><strong><fmt:formatNumber value="${p.total}" type="currency" currencySymbol="$"/></strong></td>
+                                    <td>
+                                        <form action="products" method="post" style="margin: 0;" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                            <input type="hidden" name="action" value="delete">
+                                            <input type="hidden" name="id" value="${p.id}">
+                                            <button type="submit" class="btn-delete">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>

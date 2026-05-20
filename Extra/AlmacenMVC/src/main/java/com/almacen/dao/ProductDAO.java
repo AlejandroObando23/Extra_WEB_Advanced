@@ -7,8 +7,10 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,5 +44,16 @@ public class ProductDAO {
         List<Product> products = new ArrayList<>();
         collection.find().into(products);
         return products;
+    }
+
+    public boolean deleteProduct(String id) {
+        try {
+            ObjectId objectId = new ObjectId(id);
+            var result = collection.deleteOne(Filters.eq("_id", objectId));
+            return result.getDeletedCount() > 0;
+        } catch (IllegalArgumentException e) {
+            // Invalid ObjectId format
+            return false;
+        }
     }
 }
