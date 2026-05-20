@@ -174,12 +174,12 @@
             <div class="grid-2">
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
-                    <input type="number" id="quantity" name="quantity" required min="1" placeholder="e.g. 10" value="${product.quantity}">
+                    <input type="number" id="quantity" name="quantity" required min="0" placeholder="e.g. 10" value="${product.quantity}" oninvalid="this.setCustomValidity('Por favor, ingrese un número no negativo')" oninput="this.setCustomValidity('')">
                 </div>
                 
                 <div class="form-group">
                     <label for="price">Unit Price ($)</label>
-                    <input type="number" id="price" name="price" required min="0.01" step="0.01" placeholder="e.g. 29.99" value="${product.price}">
+                    <input type="number" id="price" name="price" required min="0" step="0.01" placeholder="e.g. 29.99" value="${product.price}" oninvalid="this.setCustomValidity('Por favor, ingrese un número no negativo')" oninput="this.setCustomValidity('')">
                 </div>
             </div>
 

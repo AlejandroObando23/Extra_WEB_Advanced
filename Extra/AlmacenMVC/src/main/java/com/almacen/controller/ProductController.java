@@ -42,8 +42,8 @@ public class ProductController extends HttpServlet {
                 int quantity = Integer.parseInt(quantityStr);
                 double price = Double.parseDouble(priceStr);
                 
-                if (quantity < 1 || price <= 0) {
-                     throw new IllegalArgumentException("Quantity must be >= 1 and price > 0");
+                if (quantity < 0 || price < 0) {
+                     throw new IllegalArgumentException("No se permiten números negativos en la cantidad o el precio.");
                 }
                 
                 Product p = new Product(name.trim(), quantity, price, category, description, supplier);
@@ -83,8 +83,8 @@ public class ProductController extends HttpServlet {
                 int quantity = Integer.parseInt(quantityStr);
                 double price = Double.parseDouble(priceStr);
                 
-                if (quantity < 1 || price <= 0) {
-                     throw new IllegalArgumentException("Quantity must be >= 1 and price > 0");
+                if (quantity < 0 || price < 0) {
+                     throw new IllegalArgumentException("No se permiten números negativos en la cantidad o el precio.");
                 }
                 
                 Product p = new Product(name.trim(), quantity, price, category, description, supplier);
